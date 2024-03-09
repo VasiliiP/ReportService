@@ -9,8 +9,10 @@ public class FileService : IFileService
     {
         using var memoryStream = new MemoryStream();
         using var textWriter = new StreamWriter(memoryStream);
+        ulong total = 0;
 
         textWriter.WriteLine(period);
+        
         foreach (var department in departments)
         {
             textWriter.WriteLine("--------------------------------------------");
@@ -18,8 +20,13 @@ public class FileService : IFileService
             foreach (var employee in department.Employees)
             {
                 textWriter.WriteLine($"    {employee.Name} {employee.Salary}р");
+                total += (ulong)employee.Salary;
             }
         }
+        
+        textWriter.WriteLine("--------------------------------------------");
+        textWriter.WriteLine($"Всего по предприятию:{total}");
+        
         textWriter.Flush();
         memoryStream.Position = 0;
 

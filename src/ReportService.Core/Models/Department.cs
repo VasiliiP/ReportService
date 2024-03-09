@@ -10,8 +10,8 @@ public record Department
         Name = name;
     }
 
-    public string Id { get; set; }
-    public string Name { get; set; }
+    public string Id { get; init; }
+    public string Name { get; init; }
 
-    public List<Employee> Employees { get; } = new();
+    public List<Employee> Employees { get; } = [];
 }
