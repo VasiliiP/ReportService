@@ -27,6 +27,9 @@ public sealed class Employee
     {
         BuhCode = await _humanResources.GetEmployeeCode(Inn, ct);
         var salary = await _accountingService.GetSalary(Inn, BuhCode, ct);
+        
+        // I suppose that either salary doesn't have digits after the decimal point or it doesn't matter
+        // As there is no claim about precision in issues list I made decision to keep it as  is
         Salary = (int)salary;
     }
 }
