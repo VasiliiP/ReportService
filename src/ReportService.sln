@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2003
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportService", "ReportService\ReportService.csproj", "{231E862D-6509-4701-B706-B7E17887C9B2}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportService.Web", "ReportService.Web\ReportService.Web.csproj", "{D39751A6-DC2C-402E-B597-828BE4626FBA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportService.Core", "ReportService.Core\ReportService.Core.csproj", "{638C040C-AC18-4F40-859C-58121FC268F8}"
@@ -27,10 +25,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{231E862D-6509-4701-B706-B7E17887C9B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{231E862D-6509-4701-B706-B7E17887C9B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{231E862D-6509-4701-B706-B7E17887C9B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{231E862D-6509-4701-B706-B7E17887C9B2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D39751A6-DC2C-402E-B597-828BE4626FBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D39751A6-DC2C-402E-B597-828BE4626FBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D39751A6-DC2C-402E-B597-828BE4626FBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
