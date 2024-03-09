@@ -20,16 +20,17 @@ public class ReportService : IReportService
     private readonly IFileService _fileService;
 
 
-    public async Task<byte[]> GenerateSalaryReport(int year, int month)
+    public async Task<byte[]> GenerateSalaryReport(int year, int month, CancellationToken ct)
     {
-        var employeeDtos = await _employeeRepository.GetAllEmployees();
+        var employeeDtos = await _employeeRepository.GetAllEmployees(ct);
 
         var departments = GroupByDepartments(employeeDtos);
 
         // might worth to implement parallel calls with batches and Task.WhenAll()
         foreach (var employee in departments.SelectMany(department => department.Employees))
         {
-            await employee.ObtainSalary();
+            if (ct.IsCancellationRequested) break;
+            await employee.ObtainSalary(ct);
         }
 
         return _fileService.CreateSalaryReport(departments, MonthResolver.GetName(year, month));

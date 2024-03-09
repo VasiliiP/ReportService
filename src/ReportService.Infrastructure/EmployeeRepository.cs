@@ -22,7 +22,7 @@ public class EmployeeRepository : IEmployeeRepository
         return new NpgsqlConnection(_connectionString);
     }
 
-    public async Task<IReadOnlyCollection<EmployeeDto>> GetAllEmployees()
+    public async Task<IReadOnlyCollection<EmployeeDto>> GetAllEmployees(CancellationToken ct)
     {
         const string sql = """
                            SELECT e.name As name, e.inn AS inn, d.name AS departmentName, d.id as departmentId
@@ -30,7 +30,7 @@ public class EmployeeRepository : IEmployeeRepository
                            INNER JOIN deps d on e.departmentid = d.id
                            """;
         await using var connection = CreateConnection();
-        var employees = await connection.QueryAsync<EmployeeDto>(sql);
+        var employees = await connection.QueryAsync<EmployeeDto>(sql, ct);
         return employees.ToList();
     }
 }
