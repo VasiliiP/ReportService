@@ -7,7 +7,8 @@ public static class ReportEndpoints
 {
     public static void RegisterReportEndpoints(this WebApplication app)
     {
-        app.MapGet("/report/{year:int}/{month:int}", async Task<IResult> (int year, int month, IReportService reportService, IValidator<GetSalaryReportRequest> validator) =>
+        app.MapGet("/report/{year:int}/{month:int}", async Task<IResult> (int year, int month,
+                IReportService reportService, IValidator<GetSalaryReportRequest> validator) =>
             {
                 var validationResult = validator.Validate(new GetSalaryReportRequest(year, month));
                 if (!validationResult.IsValid)
@@ -16,10 +17,11 @@ public static class ReportEndpoints
                 }
 
                 var report = await reportService.GenerateSalaryReport(year, month);
-            return Results.File(report, "application/octet-stream", $"SalaryReport-{year}-{month}.txt"); 
-        })
-        .WithName("GetSalaryReport")
-        .WithOpenApi();;
+                return Results.File(report, "application/octet-stream", $"SalaryReport-{year}-{month}.txt");
+            })
+            .WithName("GetSalaryReport")
+            .WithOpenApi();
+        ;
     }
 }
 
