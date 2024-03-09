@@ -23,10 +23,10 @@ public sealed class Employee
     public int Salary { get; private set; }
     private string BuhCode { get; set; } = null!;
 
-    public async Task ObtainSalary()
+    public async Task ObtainSalary(CancellationToken ct)
     {
-        BuhCode = await _humanResources.GetEmployeeCode(Inn);
-        var salary = await _accountingService.GetSalary(Inn, BuhCode);
+        BuhCode = await _humanResources.GetEmployeeCode(Inn, ct);
+        var salary = await _accountingService.GetSalary(Inn, BuhCode, ct);
         Salary = (int)salary;
     }
 }

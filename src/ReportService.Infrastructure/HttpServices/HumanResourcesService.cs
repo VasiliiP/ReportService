@@ -14,8 +14,8 @@ public class HumanResourcesService : IHumanResourcesService
         _httpClient = httpClient;
         _httpClient.BaseAddress = new Uri(options.Value.BaseAddress);
     }
-    public async Task<string> GetEmployeeCode(string inn)
+    public async Task<string> GetEmployeeCode(string inn, CancellationToken ct)
     {
-        return await _httpClient.GetStringAsync($"inn/{inn}");
+        return await _httpClient.GetStringAsync($"inn/{inn}", ct);
     }
 }

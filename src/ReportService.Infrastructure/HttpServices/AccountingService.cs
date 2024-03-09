@@ -19,11 +19,11 @@ public class AccountingService : IAccountingService
         _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
     }
 
-    public async Task<decimal> GetSalary(string inn, string employeeCode)
+    public async Task<decimal> GetSalary(string inn, string employeeCode, CancellationToken ct)
     {
-        var response = await _httpClient.PostAsJsonAsync<string>($"empcode/{inn}", employeeCode);
+        var response = await _httpClient.PostAsJsonAsync($"empcode/{inn}", employeeCode, ct);
         response.EnsureSuccessStatusCode();
-        var jsonString = await response.Content.ReadAsStringAsync();
+        var jsonString = await response.Content.ReadAsStringAsync(ct);
         return JsonSerializer.Deserialize<decimal>(jsonString);
     }
 }
