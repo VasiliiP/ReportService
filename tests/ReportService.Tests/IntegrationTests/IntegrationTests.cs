@@ -18,19 +18,19 @@ public class IntegrationTests
     
 
     [OneTimeSetUp]
-    public virtual void FixtureSetup()
+    public void FixtureSetup()
     {
         _webAppFactory = new TestingWebAppFactory(_hrMock, _accountingMock, _employeeRepositoryMock);
     }
 
     [SetUp]
-    public virtual void TestSetup() => Client = _webAppFactory.CreateClient();
+    public void TestSetup() => Client = _webAppFactory.CreateClient();
 
     [TearDown]
-    public virtual void TestTearDown() => Client.Dispose();
+    public void TestTearDown() => Client.Dispose();
 
     [OneTimeTearDown]
-    public virtual async Task FixtureTearDown()
+    public async Task FixtureTearDown()
     {
         if (_webAppFactory == null)
             return;
