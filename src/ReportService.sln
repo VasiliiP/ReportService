@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportService.Core", "Repor
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D0BEDA8A-6563-4C12-87CF-57E4BE939653}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{C91AA383-865F-402D-9776-4ECDB52432F5}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{C91AA383-865F-402D-9776-4ECDB52432F5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{E5FDA62C-B669-4173-90BC-6A9836E9506B}"
 	ProjectSection(SolutionItems) = preProject
@@ -18,6 +18,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportService.Infrastructure", "ReportService.Infrastructure\ReportService.Infrastructure.csproj", "{53F527D2-2012-4C41-BB4F-DD66846488E4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportService.Tests", "..\tests\ReportService.Tests\ReportService.Tests.csproj", "{53F2C29F-E7B3-4369-B239-38F492B777F4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +39,10 @@ Global
 		{53F527D2-2012-4C41-BB4F-DD66846488E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53F527D2-2012-4C41-BB4F-DD66846488E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53F527D2-2012-4C41-BB4F-DD66846488E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53F2C29F-E7B3-4369-B239-38F492B777F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53F2C29F-E7B3-4369-B239-38F492B777F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53F2C29F-E7B3-4369-B239-38F492B777F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53F2C29F-E7B3-4369-B239-38F492B777F4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,5 +54,6 @@ Global
 		{638C040C-AC18-4F40-859C-58121FC268F8} = {D0BEDA8A-6563-4C12-87CF-57E4BE939653}
 		{D39751A6-DC2C-402E-B597-828BE4626FBA} = {D0BEDA8A-6563-4C12-87CF-57E4BE939653}
 		{53F527D2-2012-4C41-BB4F-DD66846488E4} = {D0BEDA8A-6563-4C12-87CF-57E4BE939653}
+		{53F2C29F-E7B3-4369-B239-38F492B777F4} = {C91AA383-865F-402D-9776-4ECDB52432F5}
 	EndGlobalSection
 EndGlobal

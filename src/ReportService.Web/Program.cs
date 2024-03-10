@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using FluentValidation;
 using Microsoft.AspNetCore.Diagnostics;
 using ReportService.Core.Abstractions;
@@ -8,6 +9,8 @@ using ReportService.Infrastructure.Config;
 using ReportService.Infrastructure.HttpServices;
 using ReportService.Web.Middleware;
 
+[assembly: InternalsVisibleTo("ReportService.Tests")]
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
@@ -17,7 +20,7 @@ builder.Services.Configure<DbOptions>(builder.Configuration.GetSection("DbOption
 builder.Services.Configure<HrApiOptions>(builder.Configuration.GetSection("HrApiOptions"));
 builder.Services.Configure<AccountingApiOptions>(builder.Configuration.GetSection("AccountingApiOptions"));
 
-builder.Services.AddScoped<ISalaryReportService, SalarySalaryReportService>();
+builder.Services.AddScoped<ISalaryReportService, SalaryReportService>();
 builder.Services.AddScoped<IFileService, FileService>();
 builder.Services.AddScoped<IEmployeeFactory, EmployeeFactory>();
 builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
