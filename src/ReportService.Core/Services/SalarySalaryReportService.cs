@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Logging;
 using ReportService.Core.Abstractions;
 using ReportService.Core.Dto;
 using ReportService.Core.Helpers;
@@ -5,32 +6,46 @@ using ReportService.Core.Models;
 
 namespace ReportService.Core.Services;
 
-public class ReportService : IReportService
+public class SalarySalaryReportService : ISalaryReportService
 {
-    public ReportService(IEmployeeRepository employeeRepository, IEmployeeFactory employeeFactory,
-        IFileService fileService)
+    public SalarySalaryReportService(IEmployeeRepository employeeRepository, IEmployeeFactory employeeFactory,
+        IFileService fileService, ILogger<SalarySalaryReportService> logger)
     {
         _employeeRepository = employeeRepository;
         _employeeFactory = employeeFactory;
         _fileService = fileService;
+        _logger = logger;
     }
 
     private readonly IEmployeeRepository _employeeRepository;
     private readonly IEmployeeFactory _employeeFactory;
     private readonly IFileService _fileService;
+    private readonly ILogger<SalarySalaryReportService> _logger;
 
 
     public async Task<byte[]> GenerateSalaryReport(int year, int month, CancellationToken ct)
     {
         var employeeDtos = await _employeeRepository.GetAllEmployees(ct);
+        _logger.LogDebug("{Count} employees were fetched", employeeDtos.Count);
 
         var departments = GroupByDepartments(employeeDtos);
+        _logger.LogDebug("{Count} departments were grouped", departments.Count);
+
 
         // might worth to implement parallel calls with batches and Task.WhenAll()
         foreach (var employee in departments.SelectMany(department => department.Employees))
         {
             if (ct.IsCancellationRequested) break;
-            await employee.ObtainSalary(ct);
+
+            try
+            {
+                await employee.ObtainSalary(ct);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError("Error occurs during employee: {Name} salary processing with message: {Msg}", employee.Name, e.Message );
+                throw;
+            }
         }
 
         return _fileService.CreateSalaryReport(departments, MonthResolver.GetName(year, month));

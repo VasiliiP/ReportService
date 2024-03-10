@@ -1,10 +1,12 @@
 using FluentValidation;
+using Microsoft.AspNetCore.Diagnostics;
 using ReportService.Core.Abstractions;
 using ReportService.Web.Endpoints;
 using ReportService.Core.Services;
 using ReportService.Infrastructure;
 using ReportService.Infrastructure.Config;
 using ReportService.Infrastructure.HttpServices;
+using ReportService.Web.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,7 +17,7 @@ builder.Services.Configure<DbOptions>(builder.Configuration.GetSection("DbOption
 builder.Services.Configure<HrApiOptions>(builder.Configuration.GetSection("HrApiOptions"));
 builder.Services.Configure<AccountingApiOptions>(builder.Configuration.GetSection("AccountingApiOptions"));
 
-builder.Services.AddScoped<IReportService, ReportService.Core.Services.ReportService>();
+builder.Services.AddScoped<ISalaryReportService, SalarySalaryReportService>();
 builder.Services.AddScoped<IFileService, FileService>();
 builder.Services.AddScoped<IEmployeeFactory, EmployeeFactory>();
 builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
@@ -25,6 +27,9 @@ builder.Services.AddLazyCache();
 builder.Services.AddHttpClient<IAccountingService, AccountingService>();
 builder.Services.AddHttpClient<IHumanResourcesService, HrCachedService>();
 
+builder.Services.AddSingleton<IExceptionHandler, GlobalExceptionHandler>();
+
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -33,6 +38,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseExceptionHandler();
 app.UseHttpsRedirection();
 
 app.RegisterReportEndpoints();

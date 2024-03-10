@@ -1,6 +1,6 @@
 namespace ReportService.Core.Abstractions;
 
-public interface IReportService
+public interface ISalaryReportService
 {
     Task<byte[]> GenerateSalaryReport(int year, int month, CancellationToken ct);
 }
