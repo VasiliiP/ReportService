@@ -8,14 +8,9 @@ public static class ReportEndpoints
     public static void RegisterReportEndpoints(this WebApplication app)
     {
         app.MapGet("/report/{year:int}/{month:int}", async Task<IResult> (int year, int month,
-                IReportService reportService, IValidator<GetSalaryReportRequest> validator, CancellationToken ct) =>
+                ISalaryReportService reportService, IValidator<GetSalaryReportRequest> validator, CancellationToken ct) =>
             {
-                var validationResult = validator.Validate(new GetSalaryReportRequest(year, month));
-                if (!validationResult.IsValid)
-                {
-                    return Results.ValidationProblem(validationResult.ToDictionary());
-                }
-
+                validator.ValidateAndThrow(new GetSalaryReportRequest(year, month));
                 var report = await reportService.GenerateSalaryReport(year, month, ct);
                 return Results.File(report, "application/octet-stream", $"SalaryReport-{year}-{month}.txt");
             })
