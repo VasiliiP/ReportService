@@ -27,10 +27,11 @@ builder.Services.AddLazyCache();
 builder.Services.AddHttpClient<IAccountingService, AccountingService>();
 builder.Services.AddHttpClient<IHumanResourcesService, HrCachedService>();
 
-builder.Services.AddSingleton<IExceptionHandler, GlobalExceptionHandler>();
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 
 
 var app = builder.Build();
+app.UseExceptionHandler(opt => { });
 
 if (app.Environment.IsDevelopment())
 {
@@ -38,7 +39,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseExceptionHandler();
 app.UseHttpsRedirection();
 
 app.RegisterReportEndpoints();
