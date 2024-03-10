@@ -20,9 +20,10 @@ builder.Services.AddScoped<IFileService, FileService>();
 builder.Services.AddScoped<IEmployeeFactory, EmployeeFactory>();
 builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 builder.Services.AddScoped<IValidator<GetSalaryReportRequest>, GetSalaryReportRequestValidator>();
+builder.Services.AddLazyCache();
 
 builder.Services.AddHttpClient<IAccountingService, AccountingService>();
-builder.Services.AddHttpClient<IHumanResourcesService, HumanResourcesService>();
+builder.Services.AddHttpClient<IHumanResourcesService, HrCachedService>();
 
 var app = builder.Build();
 
