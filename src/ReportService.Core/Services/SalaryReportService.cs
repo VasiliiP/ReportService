@@ -6,10 +6,10 @@ using ReportService.Core.Models;
 
 namespace ReportService.Core.Services;
 
-public class SalarySalaryReportService : ISalaryReportService
+public class SalaryReportService : ISalaryReportService
 {
-    public SalarySalaryReportService(IEmployeeRepository employeeRepository, IEmployeeFactory employeeFactory,
-        IFileService fileService, ILogger<SalarySalaryReportService> logger)
+    public SalaryReportService(IEmployeeRepository employeeRepository, IEmployeeFactory employeeFactory,
+        IFileService fileService, ILogger<SalaryReportService> logger)
     {
         _employeeRepository = employeeRepository;
         _employeeFactory = employeeFactory;
@@ -20,7 +20,7 @@ public class SalarySalaryReportService : ISalaryReportService
     private readonly IEmployeeRepository _employeeRepository;
     private readonly IEmployeeFactory _employeeFactory;
     private readonly IFileService _fileService;
-    private readonly ILogger<SalarySalaryReportService> _logger;
+    private readonly ILogger<SalaryReportService> _logger;
 
 
     public async Task<byte[]> GenerateSalaryReport(int year, int month, CancellationToken ct)
