@@ -1,8 +1,9 @@
-version: '3.4'
-
-services:
-  reportservice:
-    image: reportservice
+﻿services:
+  reportservice.web:
+    image: reportservice.web
     build:
       context: .
-      dockerfile: ReportService/Dockerfile
+      dockerfile: ReportService.Web/Dockerfile
+    ports:
+      - "8080:8080"
+      - "8081:8081"
