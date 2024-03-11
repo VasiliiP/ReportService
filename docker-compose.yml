@@ -1,0 +1,9 @@
+﻿services:
+  reportservice.web:
+    image: reportservice.web
+    build:
+      context: .
+      dockerfile: src/ReportService.Web/Dockerfile
+    ports:
+      - "8080:8080"
+      - "8081:8081"
